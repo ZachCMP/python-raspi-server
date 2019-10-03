@@ -12,7 +12,7 @@ class ColorLed(Color):
     self.setLedColor()
     
   def setColor(self, **kwargs):
-    super().setColor(**kwargs)
+    super(self.__class__, self).setColor(**kwargs)
     self.setLedColor()
 
   def setLedColor(self):
