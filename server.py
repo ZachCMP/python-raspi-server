@@ -18,9 +18,9 @@ def index():
 @app.route('/color', methods=['POST'])
 def change_color():
   global color
-  red = int(request.form['red']) if 'red' in request.form else color[0]
-  green = int(request.form['green']) if 'green' in request.form else color[1]
-  blue = int(request.form['blue']) if 'blue' in request.form else color[2]
+  red = int(request.form['red']) if 'red' in request.form else color.color[0]
+  green = int(request.form['green']) if 'green' in request.form else color.color[1]
+  blue = int(request.form['blue']) if 'blue' in request.form else color.color[2]
   color.setColor(red=red, green=green, blue=blue)
   resp = jsonify(success=True)
   return resp
