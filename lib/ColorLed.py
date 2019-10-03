@@ -5,9 +5,9 @@ from lib.Color import Color
 class ColorLed(Color):
   def __init__(self, *args, **kwargs):
     super(self.__class__, self).__init__(*args, **kwargs)
-    red_pin = os.getenv('RED_PIN')
-    green_pin = os.getenv('GREEN_PIN')
-    blue_pin = os.getenv('BLUE_PIN')
+    red_pin = int(os.getenv('RED_PIN'))
+    green_pin = int(os.getenv('GREEN_PIN'))
+    blue_pin = int(os.getenv('BLUE_PIN'))
     self.led = RGBLED(red=red_pin, green=green_pin, blue=blue_pin)
     self.setLedColor()
     
