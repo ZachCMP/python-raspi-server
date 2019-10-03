@@ -1,14 +1,19 @@
+import os
 from flask import Flask, escape, request, render_template, jsonify
 from gpiozero import RGBLED
 
+from lib.Color import Color
+from lib.ColorLed import ColorLed
+
 app = Flask(__name__)
 
-color = (0, 0, 0)
+color = ColorLed() if os.getenv('IS_RASPI') else Color()
 
 @app.route('/')
 def index():
   global color
-  return render_template('index.html', red=color[0], green=color[1], blue=color[2])
+  c = color.color
+  return render_template('index.html', red=c[0], green=c[1], blue=c[2])
 
 @app.route('/color', methods=['POST'])
 def change_color():
@@ -16,6 +21,6 @@ def change_color():
   red = int(request.form['red']) if 'red' in request.form else color[0]
   green = int(request.form['green']) if 'green' in request.form else color[1]
   blue = int(request.form['blue']) if 'blue' in request.form else color[2]
-  color = (red, green, blue)
+  color.setColor(red=red, green=green, blue=blue)
   resp = jsonify(success=True)
   return resp
